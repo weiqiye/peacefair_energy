@@ -183,7 +183,7 @@ class HPGHistorySensor(HPGBaseSensor):
     def __init__(self, history_type, sensor_type, ident, state):
         super().__init__(sensor_type, ident)
         self._unique_id = f"{DOMAIN}.{ident}_{history_type}_history"
-        self.entity_id = self._unique_id
+        self.entity_id = f"sensor.{ident}_{history_type}_history"
         self._history_type = history_type
         self._state = state
 
@@ -200,7 +200,7 @@ class HPGRealSensor(HPGBaseSensor):
     def __init__(self, history_type, sensor_type, ident, history_sensor, state, last_state, last_time):
         super().__init__(sensor_type, ident)
         self._unique_id = f"{DOMAIN}.{ident}_{history_type}_real"
-        self.entity_id = self._unique_id
+        self.entity_id = f"sensor.{ident}_{history_type}_real"
         self._history_sensor = history_sensor
         self._history_type = history_type
         self._last_state = last_state
@@ -242,7 +242,7 @@ class HPGSensor(CoordinatorEntity, HPGBaseSensor):
         super().__init__(coordinator)
         HPGBaseSensor.__init__(self, sensor_type, ident)
         self._unique_id = f"{DOMAIN}.{ident}_{sensor_type}"
-        self.entity_id = self._unique_id
+        self.entity_id = f"sensor.{ident}_{sensor_type}"
         self._energy_updates = energy_updates
         self._last_reset = datetime.datetime.fromtimestamp(last_reset)
         self._record_file = f"{STORAGE_PATH}/{entry_id}_state.json"
